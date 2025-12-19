@@ -7,6 +7,8 @@ const TabLayout = () => {
   const { theme } = useGlobalState();
   return (
     <Tabs
+      initialRouteName="index"
+      backBehavior="none"
       screenOptions={{ tabBarStyle: { backgroundColor: theme.background } }}
     >
       <Tabs.Screen
