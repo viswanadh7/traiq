@@ -10,7 +10,10 @@ type ThemedViewProps = {
 const ThemedView = ({ children }: ThemedViewProps) => {
   const { theme } = useGlobalState();
   return (
-    <SafeAreaView style={[styles.view, { backgroundColor: theme.background }]}>
+    <SafeAreaView
+      edges={["top"]}
+      style={[styles.view, { backgroundColor: theme.background }]}
+    >
       <View>{children}</View>
     </SafeAreaView>
   );
