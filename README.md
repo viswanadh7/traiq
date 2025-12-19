@@ -1,50 +1,143 @@
-# Welcome to your Expo app 👋
+# 📈 TraiQ
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**TraiQ** is a clean, read-only market watchlist mobile application that displays a curated list of stocks which may show notable price movement over the next **1 to 10 trading days**.
 
-## Get started
+The app is designed for traders, investors, and market observers who want a **signal-focused, distraction-free view** of potential market opportunities without executing trades or managing portfolios.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## 🚀 Why TraiQ Exists
 
-2. Start the app
+Most trading apps are overloaded with:
 
-   ```bash
-   npx expo start
-   ```
+- Too many indicators
+- Emotional triggers
+- Buy/Sell pressure
+- Unnecessary actions
 
-In the output, you'll find options to open the app in a
+TraiQ takes a different approach.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+It focuses purely on **visibility of potential market signals**, allowing users to observe, analyze, and decide independently using their own strategies.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## ✅ What TraiQ Does
 
-When you're ready, run:
+TraiQ focuses on **signal visibility**, not actions.
 
-```bash
-npm run reset-project
-```
+It:
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- Displays a **system-generated watchlist** of stocks
+- Highlights stocks that may perform in the **short-term window**
+- Shows **directional bias** such as bullish or momentum-based setups
+- Presents information in a **simple and readable format**
+- Provides **market-related news** for general awareness
+- Operates in a **fully read-only mode**
 
-## Learn more
+TraiQ does **not**:
 
-To learn more about developing your project with Expo, look at the following resources:
+- Place trades
+- Execute orders
+- Provide buy or sell recommendations
+- Track user portfolios
+- Store personal or financial information
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+## 🧠 How TraiQ Works (High-Level Architecture)
 
-Join our community of developers creating universal apps.
+1. Market data is analyzed using a **private AI-powered backend**
+2. The backend generates potential stock signals
+3. The processed results are uploaded to a database
+4. The TraiQ mobile app connects **only to Supabase**
+5. The app fetches and displays data in a read-only format
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+> The AI backend is **not publicly exposed** and has no direct connection to the client app.
+
+This design ensures:
+
+- Security
+- Scalability
+- Clean separation of concerns
+
+---
+
+## 📱 Application Structure
+
+TraiQ follows a simple and intentional **three-tab layout**:
+
+### 1️⃣ Feed
+
+- Displays market-related news
+- Helps users stay aware of overall market sentiment
+- No predictions or recommendations
+
+### 2️⃣ Watchlist
+
+- The core screen of the app
+- Shows stocks that may show movement in the next 1–10 days
+- Generated entirely by the system
+- No user actions required
+
+### 3️⃣ Info
+
+- Explains what TraiQ is and what it is not
+- Guides users on how to read the data
+- Contains important disclaimers
+- Displays project and version information
+- Provides a link to this GitHub repository
+
+---
+
+## 🖼️ Screenshots
+
+<p float="left">
+  <img src="assets/screenshots/Screenshot_1.jpg" alt="Image 1" width="300" style="margin-right: 10px;" />
+  <img src="assets/screenshots/Screenshot_2.jpg" alt="Image 2" width="300" style="margin-right: 10px;" />
+  <img src="assets/screenshots/Screenshot_3.jpg" alt="Image 3" width="300" style="margin-right: 10px;" />
+</p>
+
+---
+
+## 🎨 Design Philosophy
+
+TraiQ is built with the following principles:
+
+- Minimal UI
+- No clutter or noise
+- Premium color palette
+- Clear and accessible typography
+- Optimized for both light and dark modes
+
+---
+
+## 🔐 Privacy & Data Handling
+
+- TraiQ does **not collect personal user data**
+- No user behavior tracking
+- No storage of financial or sensitive information
+
+---
+
+### Planned Enhancements
+
+- Intraday watchlists
+- Long-term trend watchlists
+- Improved signal explanations
+- Enhanced filtering and categorization
+- Performance and UI improvements
+
+---
+
+## ⚠️ Disclaimer
+
+TraiQ is **not a registered investment advisor**.
+
+All information provided by TraiQ is for **educational and informational purposes only**.
+
+Nothing in this application should be considered financial, investment, or trading advice.
+
+Stock market investments are subject to market risk.  
+Past performance does not guarantee future results.
+
+Users assume full responsibility for any decisions made based on the information displayed in this app.
