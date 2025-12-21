@@ -36,6 +36,13 @@ const NewsCard = memo(({ news }: TNewsCard) => {
             { backgroundColor: isDarkTheme ? "#000000ff" : "#f0f0f0ff" },
           ]}
         >
+          <Typo styles={styles.date}>
+            {new Date(news.created_at).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </Typo>
           <Typo styles={styles.title}>{news.title}</Typo>
           <Typo styles={styles.description}>{news.description}</Typo>
         </View>
@@ -54,6 +61,11 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 8,
     paddingVertical: 15,
     paddingHorizontal: 10,
+  },
+  date: {
+    fontSize: 13,
+    opacity: 0.6,
+    marginBottom: 5,
   },
   title: {
     fontSize: 18,
