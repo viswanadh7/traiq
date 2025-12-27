@@ -1,53 +1,52 @@
+import { ColorsType } from "@/styles/theme";
 import { TNews } from "@/types/news.type";
-import React, { memo } from "react";
+import { CalendarDotsIcon } from "phosphor-react-native";
+import React, { memo, useCallback } from "react";
 import {
   Alert,
   Image,
   Linking,
+  Pressable,
   StyleSheet,
-  TouchableOpacity,
-  useColorScheme,
   View,
 } from "react-native";
 import Typo from "./ui/Typo";
 
 type TNewsCard = {
   news: TNews;
+  theme: ColorsType;
 };
 
-const NewsCard = memo(({ news }: TNewsCard) => {
-  const isDarkTheme = useColorScheme() === "dark";
-
-  const handlePress = async () => {
+const NewsCard = memo(({ news, theme }: TNewsCard) => {
+  const handlePress = useCallback(async () => {
     const supported = await Linking.canOpenURL(news.link);
     if (supported) {
       await Linking.openURL(news.link);
     } else {
       Alert.alert("Couldn't open the url");
     }
-  };
+  }, [news.link]);
+
+  const formattedDate = new Date(news.created_at!).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
   return (
-    <TouchableOpacity onPress={handlePress}>
+    <Pressable onPress={handlePress}>
       <View style={styles.card}>
         <Image source={{ uri: news.image_url }} style={styles.image} />
-        <View
-          style={[
-            styles.cardBody,
-            { backgroundColor: isDarkTheme ? "#000000ff" : "#f0f0f0ff" },
-          ]}
-        >
-          <Typo styles={styles.date}>
-            {new Date(news.created_at).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </Typo>
+        <View style={[styles.cardBody, { backgroundColor: theme.card }]}>
+          <View style={styles.dateView}>
+            <CalendarDotsIcon size={15} color={theme.text} />
+            <Typo styles={styles.date}>{formattedDate}</Typo>
+          </View>
           <Typo styles={styles.title}>{news.title}</Typo>
-          <Typo styles={styles.description}>{news.description}</Typo>
+          <Typo numberOfLines={4}>{news.description}</Typo>
         </View>
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 });
 
@@ -62,19 +61,19 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 10,
   },
+  dateView: {
+    flexDirection: "row",
+    gap: 5,
+    marginBottom: 8,
+    opacity: 0.6,
+  },
   date: {
     fontSize: 13,
-    opacity: 0.6,
-    marginBottom: 5,
   },
   title: {
     fontSize: 18,
     fontWeight: "700",
     marginBottom: 5,
-  },
-  description: {
-    maxHeight: 80,
-    textOverflow: "ellipsis",
   },
   image: {
     width: "100%",
