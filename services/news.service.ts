@@ -30,7 +30,7 @@ const getLatestNewsFromDB = async (start: Date, end: Date) => {
     .lte("created_at", end.toISOString());
 };
 
-const uploadLatestNewsIntoDB = async (news: TNews[]) => {
+const uploadLatestNewsIntoDB = async (news: TNewsData[]) => {
   return await supabase.from("news").insert(news);
 };
 
@@ -57,7 +57,7 @@ export const getLatestNews = async () => {
   // remove the old news from database
   await removeOldNewsFromDB(start);
   // if no news fetched from database, fetch the latest news from api
-  const fetchedNews: TNews[] = await fetchNewsFromAPI();
+  const fetchedNews: TNewsData[] = await fetchNewsFromAPI();
   let filteredNews = [];
   for (let news of fetchedNews) {
     if (news.title && news.description && news.image_url && news.link) {
