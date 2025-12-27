@@ -37,7 +37,7 @@ const Feed = () => {
         data={latestNews}
         renderItem={RenderNews}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(item) => String(item?.id)}
+        keyExtractor={(item) => String(item.id)}
       />
     </ThemedView>
   );
