@@ -1,12 +1,15 @@
 import StockCard from "@/components/StockCard";
 import Loading from "@/components/ui/Loading";
+import NoNetwork from "@/components/ui/NoNetwork";
 import ThemedView from "@/components/ui/ThemedView";
+import { useGlobalState } from "@/hooks/use-global-state";
 import supabase from "@/supabase";
 import { TStock } from "@/types/stock.type";
 import React, { useEffect, useState } from "react";
 import { FlatList } from "react-native";
 
 const WatchList = () => {
+  const { isConnected } = useGlobalState();
   const [stocks, setStocks] = useState<TStock[]>();
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -24,6 +27,9 @@ const WatchList = () => {
   };
   if (loading) {
     return <Loading />;
+  }
+  if (!isConnected) {
+    return <NoNetwork />;
   }
   return (
     <ThemedView>
