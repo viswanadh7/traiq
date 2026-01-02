@@ -1,5 +1,6 @@
 import NewsCard from "@/components/NewsCard";
 import Loading from "@/components/ui/Loading";
+import NoNetwork from "@/components/ui/NoNetwork";
 import ThemedView from "@/components/ui/ThemedView";
 import { useGlobalState } from "@/hooks/use-global-state";
 import { getLatestNews } from "@/services/news.service";
@@ -8,8 +9,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { FlatList } from "react-native";
 
 const Feed = () => {
-  const { theme } = useGlobalState();
-
+  const { theme, isConnected } = useGlobalState();
   const [latestNews, setLatestNews] = useState<TNews[]>();
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -30,6 +30,9 @@ const Feed = () => {
 
   if (loading) {
     return <Loading />;
+  }
+  if (!isConnected) {
+    return <NoNetwork />;
   }
   return (
     <ThemedView>
