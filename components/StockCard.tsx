@@ -15,6 +15,7 @@ const StockCard = ({ stock }: TStockCard) => {
       style={[
         styles.card,
         {
+          backgroundColor: theme.card,
           borderColor: theme.tabIconDefault,
         },
       ]}
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     gap: 10,
     padding: 10,
     marginVertical: 8,
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderRadius: 6,
   },
   header: {
