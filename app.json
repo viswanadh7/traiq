@@ -2,7 +2,7 @@
   "expo": {
     "name": "TraiQ",
     "slug": "traiq",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/traiq-logo.png",
     "scheme": "traiq",
