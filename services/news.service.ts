@@ -1,9 +1,17 @@
 import supabase from "@/supabase";
-import { TNews } from "@/types/news.type";
+import { TNewsData } from "@/types/news.type";
 
 const API_KEY = process.env.EXPO_PUBLIC_API_KEY as string;
 const API_URL = process.env.EXPO_PUBLIC_API_URL as string;
 const URL = `${API_URL}?apikey=${API_KEY}`;
+
+const removeDuplicates = (arr: TNewsData[]): TNewsData[] => {
+  const uniqueByTitle = new Map();
+  arr.forEach((news) => {
+    uniqueByTitle.set(news.title, news);
+  });
+  return Array.from(uniqueByTitle.values());
+};
 
 const fetchNewsFromAPI = async () => {
   const keywords = [
@@ -19,7 +27,9 @@ const fetchNewsFromAPI = async () => {
   }
   const res = await Promise.all(promises);
   const data = await Promise.all(res.map((item) => item.json()));
-  return data.flatMap((item) => item.results);
+  const results = data.flatMap((item) => item.results);
+  const uniqueResults = removeDuplicates(results);
+  return uniqueResults;
 };
 
 const getLatestNewsFromDB = async (start: Date, end: Date) => {
