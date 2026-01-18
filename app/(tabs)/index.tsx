@@ -25,12 +25,10 @@ const WatchList = () => {
     setStocks(data as TStock[]);
     setLoading(false);
   };
-  if (loading) {
-    return <Loading />;
-  }
-  if (!isConnected) {
-    return <NoNetwork />;
-  }
+
+  if (!isConnected) return <NoNetwork />;
+  if (loading) return <Loading />;
+
   return (
     <ThemedView>
       <FlatList
