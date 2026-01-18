@@ -24,3 +24,8 @@ export const signUpSchema = yup.object().shape({
     .trim()
     .required("Password is a required field"),
 });
+
+export const signInSchema = yup.object().shape({
+  email: yup.string().trim().required("Email address cannot be empty"),
+  password: yup.string().trim().required("Password cannot be empty"),
+});
