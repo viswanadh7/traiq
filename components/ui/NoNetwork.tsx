@@ -7,7 +7,7 @@ const NoNetwork = () => {
   return (
     <ThemedView>
       <View style={styles.view}>
-        <Typo>No Network!</Typo>
+        <Typo styles={styles.text}>No Network!</Typo>
         <Typo>Please check your internet connection.</Typo>
       </View>
     </ThemedView>
@@ -19,6 +19,12 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "center",
     alignItems: "center",
+  },
+  text: {
+    fontWeight: "bold",
+    fontSize: 22,
+    marginBottom: 5,
+    letterSpacing: 0.8,
   },
 });
 
