@@ -28,12 +28,9 @@ const Feed = () => {
     [theme]
   );
 
-  if (loading) {
-    return <Loading />;
-  }
-  if (!isConnected) {
-    return <NoNetwork />;
-  }
+  if (!isConnected) return <NoNetwork />;
+  if (loading) return <Loading />;
+
   return (
     <ThemedView>
       <FlatList
