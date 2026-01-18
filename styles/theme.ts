@@ -10,6 +10,7 @@ export const Colors = {
     tabIconDefault: "#687076",
     tabIconSelected: tintColorLight,
     card: "#fff",
+    submit: "#6796faff",
   },
   dark: {
     text: "#ECEDEE",
@@ -19,6 +20,7 @@ export const Colors = {
     tabIconDefault: "#9BA1A6",
     tabIconSelected: tintColorDark,
     card: "#000000ff",
+    submit: "#3e7bffff",
   },
 };
 
