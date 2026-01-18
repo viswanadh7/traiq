@@ -1,7 +1,9 @@
 import StockCard from "@/components/StockCard";
+import EmptyWatchList from "@/components/ui/EmptyWatchList";
 import Loading from "@/components/ui/Loading";
 import NoNetwork from "@/components/ui/NoNetwork";
 import ThemedView from "@/components/ui/ThemedView";
+import WatchListHeader from "@/components/ui/WatchListHeader";
 import { useGlobalState } from "@/hooks/use-global-state";
 import supabase from "@/supabase";
 import { TStock } from "@/types/stock.type";
@@ -10,7 +12,7 @@ import { FlatList } from "react-native";
 
 const WatchList = () => {
   const { isConnected } = useGlobalState();
-  const [stocks, setStocks] = useState<TStock[]>();
+  const [stocks, setStocks] = useState<TStock[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -33,8 +35,15 @@ const WatchList = () => {
     <ThemedView>
       <FlatList
         data={stocks}
-        renderItem={({ item, index }) => <StockCard key={index} stock={item} />}
+        renderItem={({ item }) => <StockCard stock={item} />}
+        keyExtractor={(item) => String(item.id)}
         showsVerticalScrollIndicator={false}
+        ListEmptyComponent={<EmptyWatchList />}
+        ListHeaderComponent={
+          stocks.length ? (
+            <WatchListHeader date={stocks?.[0].created_at} />
+          ) : null
+        }
       />
     </ThemedView>
   );

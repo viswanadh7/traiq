@@ -4,6 +4,7 @@ type TClose = {
 };
 
 export type TStock = {
+  id: number;
   symbol: string;
   pattern: string;
   close: TClose;
@@ -11,4 +12,5 @@ export type TStock = {
   target: number;
   stopLoss: number;
   reason: string;
+  created_at: Date;
 };
