@@ -2,69 +2,163 @@ import { useGlobalState } from "@/hooks/use-global-state";
 import { THistory } from "@/types/stock.type";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Divider from "./ui/Divider";
 import Typo from "./ui/Typo";
 
 type HistoryCardProps = {
   stock: THistory;
 };
+
 const HistoryCard = ({ stock }: HistoryCardProps) => {
   const { theme } = useGlobalState();
 
-  const STATUS_MAP = {
-    TARGET: { text: "TARGET HIT", color: "#16a34a" },
-    STOP: { text: "STOP LOSS", color: "#dc2626" },
-    ACTIVE: { text: "ACTIVE", color: "#0047AB" },
-    CLOSED: { text: "CLOSED", color: "#6b7280" },
+  const getStatusConfig = () => {
+    if (stock.isTargetHit) return theme.target;
+    if (stock.isStopLossHit) return theme.stopLoss;
+    if (stock.isActive) return theme.active;
+    return theme.closed;
   };
 
-  const getStatus = () => {
-    if (stock.isTargetHit) return STATUS_MAP.TARGET;
-    if (stock.isStopLossHit) return STATUS_MAP.STOP;
-    if (stock.isActive) return STATUS_MAP.ACTIVE;
-    return STATUS_MAP.CLOSED;
+  const status = getStatusConfig();
+
+  const calculatePnL = () => {
+    if (stock.isTargetHit) {
+      return ((stock.target - stock.entry) / stock.entry) * 100;
+    }
+    if (stock.isStopLossHit) {
+      return ((stock.stopLoss - stock.entry) / stock.entry) * 100;
+    }
+    return ((stock.price - stock.entry) / stock.entry) * 100;
   };
-  const status = getStatus();
+
+  const pnl = calculatePnL();
+  const isProfitable = pnl >= 0;
+
+  const pnlConfig = isProfitable ? theme.target : theme.stopLoss;
 
   return (
-    <View
-      style={[
-        styles.card,
-        {
-          backgroundColor: theme.card,
-          borderColor: theme.tabIconDefault,
-        },
-      ]}
-    >
-      <View style={styles.topRow}>
-        <View>
-          <Typo styles={styles.symbol}>{stock.symbol}</Typo>
-          <Typo styles={styles.price}>₹ {stock.price}</Typo>
+    <View style={styles.container}>
+      <View
+        style={[
+          styles.card,
+          {
+            backgroundColor: theme.card,
+          },
+        ]}
+      >
+        <View style={styles.headerSection}>
+          <View style={styles.symbolRow}>
+            <Typo styles={[styles.symbol, { color: theme.text }]}>
+              {stock.symbol}
+            </Typo>
+            <View
+              style={[
+                styles.statusPill,
+                { backgroundColor: status.background },
+              ]}
+            >
+              <Text style={[styles.statusLabel, { color: status.color }]}>
+                {stock.isTargetHit
+                  ? "Target Hit"
+                  : stock.isStopLossHit
+                    ? "Stop Loss"
+                    : stock.isActive
+                      ? "Active"
+                      : "Closed"}
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.priceSection}>
+            <Typo styles={[styles.currentPrice, { color: theme.text }]}>
+              ₹{stock.price}
+            </Typo>
+            <View
+              style={[
+                styles.pnlContainer,
+                { backgroundColor: pnlConfig.background },
+              ]}
+            >
+              <Text style={[styles.pnlText, { color: pnlConfig.color }]}>
+                {isProfitable ? "▲" : "▼"} {Math.abs(pnl).toFixed(2)}%
+              </Text>
+            </View>
+          </View>
         </View>
 
-        <View style={[styles.statusChip, { backgroundColor: status.color }]}>
-          <Text style={styles.statusText}>{status.text}</Text>
-        </View>
-      </View>
+        <View
+          style={[
+            styles.levelsGrid,
+            { backgroundColor: theme.levelBackground },
+          ]}
+        >
+          <View style={styles.levelItem}>
+            <View style={styles.levelHeader}>
+              <View
+                style={[
+                  styles.levelDot,
+                  { backgroundColor: theme.tabIconDefault },
+                ]}
+              />
+              <Text style={[styles.levelTitle, { color: theme.icon }]}>
+                Entry
+              </Text>
+            </View>
+            <Typo styles={[styles.levelPrice, { color: theme.text }]}>
+              ₹{stock.entry}
+            </Typo>
+          </View>
 
-      <Divider />
+          <View
+            style={[styles.verticalDivider, { backgroundColor: theme.divider }]}
+          />
 
-      <View style={styles.levelsContainer}>
-        <View style={styles.levelBox}>
-          <Typo styles={styles.levelLabel}>ENTRY</Typo>
-          <Typo styles={styles.levelValue}>{stock.entry}</Typo>
-        </View>
+          <View style={styles.levelItem}>
+            <View style={styles.levelHeader}>
+              <View
+                style={[
+                  styles.levelDot,
+                  { backgroundColor: theme.target.color },
+                ]}
+              />
+              <Text style={[styles.levelTitle, { color: theme.icon }]}>
+                Target
+              </Text>
+            </View>
+            <Text style={[styles.levelPrice, { color: theme.target.color }]}>
+              ₹{stock.target}
+            </Text>
+            <Text style={[styles.levelDiff, { color: theme.icon }]}>
+              +{(((stock.target - stock.entry) / stock.entry) * 100).toFixed(1)}
+              %
+            </Text>
+          </View>
 
-        <View style={styles.levelBox}>
-          <Typo styles={styles.levelLabel}>TARGET</Typo>
-          <Text style={[styles.levelValue, styles.target]}>{stock.target}</Text>
-        </View>
+          <View
+            style={[styles.verticalDivider, { backgroundColor: theme.divider }]}
+          />
 
-        <View style={styles.levelBox}>
-          <Typo styles={styles.levelLabel}>STOP LOSS</Typo>
-          <Text style={[styles.levelValue, styles.stopLoss]}>
-            {stock.stopLoss}
-          </Text>
+          <View style={styles.levelItem}>
+            <View style={styles.levelHeader}>
+              <View
+                style={[
+                  styles.levelDot,
+                  { backgroundColor: theme.stopLoss.color },
+                ]}
+              />
+              <Text style={[styles.levelTitle, { color: theme.icon }]}>
+                Stop Loss
+              </Text>
+            </View>
+            <Text style={[styles.levelPrice, { color: theme.stopLoss.color }]}>
+              ₹{stock.stopLoss}
+            </Text>
+            <Text style={[styles.levelDiff, { color: theme.icon }]}>
+              {(((stock.stopLoss - stock.entry) / stock.entry) * 100).toFixed(
+                1,
+              )}
+              %
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -72,74 +166,97 @@ const HistoryCard = ({ stock }: HistoryCardProps) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    marginVertical: 6,
+  },
   card: {
-    borderRadius: 18,
-    padding: 18,
-    marginVertical: 10,
-    borderWidth: 0.5,
+    borderRadius: 24,
+    padding: 24,
   },
-
-  topRow: {
+  headerSection: {
+    marginBottom: 12,
+  },
+  symbolRow: {
     flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
-    alignItems: "flex-end",
+    marginBottom: 10,
   },
-
   symbol: {
-    fontSize: 20,
-    fontWeight: "700",
+    fontSize: 22,
+    fontWeight: "800",
     letterSpacing: 1,
   },
-
-  price: {
-    marginTop: 2,
-    fontSize: 18,
-    opacity: 0.6,
-    fontWeight: "500",
+  statusPill: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
   },
-
-  statusChip: {
-    paddingHorizontal: 14,
+  statusLabel: {
+    fontSize: 13,
+    fontWeight: "700",
+    letterSpacing: 0.3,
+  },
+  priceSection: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+  currentPrice: {
+    fontSize: 22,
+    fontWeight: "light",
+    opacity: 0.6,
+  },
+  pnlContainer: {
+    paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 20,
   },
-
-  statusText: {
-    color: "white",
+  pnlText: {
     fontSize: 12,
     fontWeight: "700",
-    letterSpacing: 0.5,
+    letterSpacing: 0.2,
   },
-
-  levelsContainer: {
+  levelsGrid: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    borderRadius: 16,
+    padding: 20,
+    gap: 16,
   },
-
-  levelBox: {
+  levelItem: {
     flex: 1,
     alignItems: "center",
+    gap: 8,
   },
-
-  levelLabel: {
+  levelHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    marginBottom: 4,
+  },
+  levelDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+  },
+  levelTitle: {
     fontSize: 11,
-    opacity: 0.6,
     fontWeight: "600",
-    letterSpacing: 0.6,
+    textTransform: "uppercase",
+    letterSpacing: 0.8,
   },
-
-  levelValue: {
-    marginTop: 6,
-    fontSize: 16,
+  levelPrice: {
+    fontSize: 17,
     fontWeight: "700",
+    letterSpacing: -0.2,
   },
-
-  target: {
-    color: "#16a34a",
+  levelDiff: {
+    fontSize: 12,
+    fontWeight: "600",
+    marginTop: 2,
   },
-
-  stopLoss: {
-    color: "#dc2626",
+  verticalDivider: {
+    width: 1,
   },
 });
 
