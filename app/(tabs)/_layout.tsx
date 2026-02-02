@@ -1,6 +1,11 @@
 import { useGlobalState } from "@/hooks/use-global-state";
 import { Tabs } from "expo-router";
-import { InfoIcon, ListHeartIcon, RssSimpleIcon } from "phosphor-react-native";
+import {
+  ClockCounterClockwiseIcon,
+  InfoIcon,
+  ListHeartIcon,
+  RssSimpleIcon,
+} from "phosphor-react-native";
 import React from "react";
 
 const TabLayout = () => {
@@ -28,6 +33,16 @@ const TabLayout = () => {
           headerShown: false,
           tabBarIcon: ({ color }) => (
             <ListHeartIcon size={30} color={color} weight="thin" />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="history"
+        options={{
+          title: "History",
+          headerShown: false,
+          tabBarIcon: ({ color }) => (
+            <ClockCounterClockwiseIcon size={30} color={color} weight="thin" />
           ),
         }}
       />
