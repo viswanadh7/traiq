@@ -3,6 +3,11 @@ type TClose = {
   changePercent: number;
 };
 
+export enum Direction {
+  LONG = "LONG",
+  SHORT = "SHORT",
+}
+
 export type TStock = {
   id: number;
   symbol: string;
@@ -12,5 +17,7 @@ export type TStock = {
   target: number;
   stopLoss: number;
   reason: string;
+  direction: Direction.LONG | Direction.SHORT;
+  confidence: number;
   created_at: Date;
 };
