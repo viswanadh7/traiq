@@ -1,29 +1,27 @@
 import { useGlobalState } from "@/hooks/use-global-state";
 import React, { ReactNode } from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 type ThemedViewProps = {
   children: ReactNode;
+  paddingHorizontal?: number;
 };
 
-const ThemedView = ({ children }: ThemedViewProps) => {
+const ThemedView = ({ children, paddingHorizontal }: ThemedViewProps) => {
   const { theme } = useGlobalState();
   return (
     <SafeAreaView
       edges={["top"]}
-      style={[styles.view, { backgroundColor: theme.background }]}
+      style={{
+        flex: 1,
+        backgroundColor: theme.background,
+        paddingHorizontal: paddingHorizontal ?? 20,
+      }}
     >
       <View>{children}</View>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  view: {
-    flex: 1,
-    paddingHorizontal: 20,
-  },
-});
 
 export default ThemedView;
