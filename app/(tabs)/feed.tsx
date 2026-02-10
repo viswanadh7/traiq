@@ -1,5 +1,5 @@
+import FeedLoading from "@/components/FeedLoading";
 import NewsCard from "@/components/NewsCard";
-import Loading from "@/components/ui/Loading";
 import NoNetwork from "@/components/ui/NoNetwork";
 import ThemedView from "@/components/ui/ThemedView";
 import { useGlobalState } from "@/hooks/use-global-state";
@@ -25,11 +25,11 @@ const Feed = () => {
 
   const RenderNews = useCallback(
     ({ item }: { item: TNews }) => <NewsCard news={item} theme={theme} />,
-    [theme]
+    [theme],
   );
 
   if (!isConnected) return <NoNetwork />;
-  if (loading) return <Loading />;
+  if (loading) return <FeedLoading />;
 
   return (
     <ThemedView>
