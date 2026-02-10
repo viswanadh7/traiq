@@ -32,8 +32,9 @@ const WatchList = () => {
   if (loading) return <WatchListLoading />;
 
   return (
-    <ThemedView>
+    <ThemedView paddingHorizontal={0}>
       <FlatList
+        style={{ paddingHorizontal: 20 }}
         data={stocks}
         renderItem={({ item }) => <StockCard stock={item} />}
         keyExtractor={(item) => String(item.id)}
