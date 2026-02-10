@@ -1,13 +1,17 @@
-import { useGlobalState } from "@/hooks/use-global-state";
 import { Text } from "react-native";
 
-const PatternChip = ({ text }: { text: string }) => {
-  const { theme } = useGlobalState();
+type PatternChipProps = {
+  text: string;
+  color: string;
+  backgroundColor: string;
+};
+
+const PatternChip = ({ text, color, backgroundColor }: PatternChipProps) => {
   return (
     <Text
       style={{
-        backgroundColor: theme.target.background,
-        color: theme.target.color,
+        backgroundColor: backgroundColor,
+        color: color,
         paddingHorizontal: 10,
         paddingVertical: 2,
         borderRadius: 20,
