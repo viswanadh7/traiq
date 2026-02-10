@@ -1,5 +1,5 @@
 import { useGlobalState } from "@/hooks/use-global-state";
-import { TStock } from "@/types/stock.type";
+import { Direction, TStock } from "@/types/stock.type";
 import { calculatePotential, calculateRR } from "@/utils/calculations";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -27,7 +27,19 @@ const StockCard = ({ stock }: TStockCard) => {
           <Typo styles={styles.price}>₹ {stock.close.price}</Typo>
         </View>
         <View style={styles.header}>
-          <PatternChip text={stock.pattern} />
+          <PatternChip
+            text={stock.pattern}
+            color={
+              stock.direction === Direction.LONG
+                ? theme.target.color
+                : theme.stopLoss.color
+            }
+            backgroundColor={
+              stock.direction === Direction.LONG
+                ? theme.target.background
+                : theme.stopLoss.background
+            }
+          />
 
           <Text
             style={{
@@ -80,7 +92,14 @@ const StockCard = ({ stock }: TStockCard) => {
       <View style={{ flexDirection: "row", gap: 20 }}>
         <View style={{ flexDirection: "row", gap: 5, alignItems: "center" }}>
           <Typo>Potential:</Typo>
-          <Text style={{ color: theme.target.color }}>
+          <Text
+            style={{
+              color:
+                stock.direction === Direction.LONG
+                  ? theme.target.color
+                  : theme.stopLoss.color,
+            }}
+          >
             {calculatePotential(stock.entry, stock.target)}%
           </Text>
         </View>
