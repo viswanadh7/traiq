@@ -1,9 +1,9 @@
 import StockCard from "@/components/StockCard";
 import EmptyWatchList from "@/components/ui/EmptyWatchList";
-import Loading from "@/components/ui/Loading";
 import NoNetwork from "@/components/ui/NoNetwork";
 import ThemedView from "@/components/ui/ThemedView";
 import WatchListHeader from "@/components/ui/WatchListHeader";
+import WatchListLoading from "@/components/WatchListLoading";
 import { useGlobalState } from "@/hooks/use-global-state";
 import supabase from "@/supabase";
 import { TStock } from "@/types/stock.type";
@@ -29,7 +29,7 @@ const WatchList = () => {
   };
 
   if (!isConnected) return <NoNetwork />;
-  if (loading) return <Loading />;
+  if (loading) return <WatchListLoading />;
 
   return (
     <ThemedView>
