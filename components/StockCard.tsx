@@ -24,7 +24,7 @@ const StockCard = ({ stock }: TStockCard) => {
       <View>
         <View style={styles.header}>
           <Typo styles={styles.symbol}>{stock.symbol}</Typo>
-          <Typo styles={styles.price}>₹ {stock.close.price}</Typo>
+          <Typo styles={styles.price}>₹ {stock.price}</Typo>
         </View>
         <View style={styles.header}>
           <PatternChip
@@ -44,12 +44,12 @@ const StockCard = ({ stock }: TStockCard) => {
           <Text
             style={{
               color:
-                stock.close.changePercent > 0
+                stock.changePercent > 0
                   ? theme.target.color
                   : theme.stopLoss.color,
             }}
           >
-            {stock.close.changePercent}%
+            {stock.changePercent}%
           </Text>
         </View>
       </View>
