@@ -38,6 +38,8 @@ const Feed = () => {
         renderItem={RenderNews}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item) => String(item.id)}
+        initialNumToRender={5}
+        maxToRenderPerBatch={5}
       />
     </ThemedView>
   );
