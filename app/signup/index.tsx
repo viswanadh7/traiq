@@ -55,6 +55,19 @@ const SignUp = () => {
       });
       return;
     }
+    Toast.show({
+      type: "success",
+      text1: "Account created successfully",
+      text2: "Sign in to continue to TraiQ",
+      text1Style: {
+        fontSize: 17,
+        color: "green",
+        fontWeight: "ultralight",
+      },
+      text2Style: {
+        fontSize: 14,
+      },
+    });
     router.replace("/signin");
   };
   return (
