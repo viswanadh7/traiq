@@ -24,6 +24,7 @@ const SignUp = () => {
   const {
     control,
     handleSubmit,
+    setFocus,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(signUpSchema),
@@ -73,6 +74,9 @@ const SignUp = () => {
               icon={<UserIcon size={20} color={theme.icon} />}
               error={errors.name?.message}
               onChangeText={field.onChange}
+              returnKeyType="next"
+              submitBehavior="submit"
+              onSubmitEditing={() => setFocus("email")}
               {...field}
             />
           )}
@@ -88,6 +92,9 @@ const SignUp = () => {
               error={errors.email?.message}
               onChangeText={field.onChange}
               autoCapitalize="none"
+              returnKeyType="next"
+              submitBehavior="submit"
+              onSubmitEditing={() => setFocus("password")}
               {...field}
             />
           )}
@@ -103,6 +110,8 @@ const SignUp = () => {
               icon={<LockKeyIcon size={20} color={theme.icon} />}
               error={errors.password?.message}
               onChangeText={field.onChange}
+              returnKeyType="done"
+              onSubmitEditing={handleSubmit(handleSignUp)}
               {...field}
             />
           )}
