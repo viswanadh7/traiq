@@ -82,9 +82,10 @@ export const getLatestNews = async () => {
   // upload latest news fetched from api to the database
   const { error: uploadError } = await uploadLatestNewsIntoDB(filteredNews);
   if (!uploadError) {
-    return filteredNews.map((item) => {
+    return filteredNews.map((item, index) => {
       return {
         ...item,
+        id: index,
         created_at: new Date().toISOString(),
       };
     });
