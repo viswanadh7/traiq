@@ -24,6 +24,7 @@ const SignIn = () => {
   const {
     control,
     handleSubmit,
+    setFocus,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(signInSchema),
@@ -42,9 +43,11 @@ const SignIn = () => {
         text1: error.message,
         text1Style: {
           fontSize: 17,
-          letterSpacing: 0.5,
           color: "red",
           fontWeight: "ultralight",
+        },
+        text2Style:{
+          fontSize: 14
         },
         ...toastOptions,
       });
@@ -71,6 +74,9 @@ const SignIn = () => {
               error={errors.email?.message}
               onChangeText={field.onChange}
               autoCapitalize="none"
+              returnKeyType="next"
+              submitBehavior="submit"
+              onSubmitEditing={() => setFocus("password")}
               {...field}
             />
           )}
@@ -86,6 +92,8 @@ const SignIn = () => {
               icon={<LockKeyIcon size={20} color={theme.icon} />}
               error={errors.password?.message}
               onChangeText={field.onChange}
+              returnKeyType="done"
+              onSubmitEditing={handleSubmit(handleSignIn)}
               {...field}
             />
           )}
