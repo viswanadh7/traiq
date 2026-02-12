@@ -2,7 +2,7 @@
   "expo": {
     "name": "TraiQ",
     "slug": "traiq",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "orientation": "portrait",
     "icon": "./assets/images/traiq-logo.png",
     "scheme": "traiq",
@@ -48,9 +48,8 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "fc8d3bd7-701f-4149-b7c4-4d6e7c584e49"
+        "projectId": "5bc1725d-3a25-4c5d-8f05-1eaef2eafe8a"
       }
-    },
-    "owner": "viswanadh"
+    }
   }
 }
