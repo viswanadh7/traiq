@@ -4,6 +4,7 @@ import ThemedView from "@/components/ui/ThemedView";
 import Typo from "@/components/ui/Typo";
 import { useGlobalState } from "@/hooks/use-global-state";
 import { signInSchema } from "@/schema";
+import { registerForNotifications } from "@/services/notification.service";
 import supabase from "@/supabase";
 import { AuthError, TSignIn } from "@/types/user.type";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -32,28 +33,33 @@ const SignIn = () => {
   });
 
   const handleSignIn = async (sigInData: TSignIn) => {
-    const { error } = await supabase.auth.signInWithPassword(sigInData);
-    if (error) {
-      let toastOptions: Record<string, string> = {};
-      if (error.code === AuthError.INVALID_CREDENTIALS) {
-        toastOptions["text2"] = "Please check your email and password";
+    try {
+      const { error, data } = await supabase.auth.signInWithPassword(sigInData);
+      if (error) {
+        let toastOptions: Record<string, string> = {};
+        if (error.code === AuthError.INVALID_CREDENTIALS) {
+          toastOptions["text2"] = "Please check your email and password";
+        }
+        Toast.show({
+          type: "error",
+          text1: error.message,
+          text1Style: {
+            fontSize: 17,
+            color: "red",
+            fontWeight: "ultralight",
+          },
+          text2Style: {
+            fontSize: 14,
+          },
+          ...toastOptions,
+        });
+        return;
       }
-      Toast.show({
-        type: "error",
-        text1: error.message,
-        text1Style: {
-          fontSize: 17,
-          color: "red",
-          fontWeight: "ultralight",
-        },
-        text2Style:{
-          fontSize: 14
-        },
-        ...toastOptions,
-      });
-      return;
+      await registerForNotifications(data.user.id);
+      router.replace("/(tabs)");
+    } catch (error) {
+      console.log(error);
     }
-    router.replace("/(tabs)");
   };
 
   return (
