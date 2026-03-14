@@ -42,3 +42,6 @@ app-example
 # generated native folders
 /ios
 /android
+
+# firebase cloud messaging - https://console.firebase.google.com
+google-services.json
