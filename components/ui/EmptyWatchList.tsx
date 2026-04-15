@@ -5,7 +5,7 @@ import Typo from "./Typo";
 const EmptyWatchList = () => {
   return (
     <View style={styles.view}>
-      <Typo styles={styles.text}>Watchlist is empty</Typo>
+      <Typo style={styles.text}>Watchlist is empty</Typo>
       <Typo>Stay tuned, we will update the watchlist soon</Typo>
     </View>
   );

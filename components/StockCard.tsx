@@ -2,7 +2,7 @@ import { useGlobalState } from "@/hooks/use-global-state";
 import { Direction, TStock } from "@/types/stock.type";
 import { calculatePotential, calculateRR } from "@/utils/calculations";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import PatternChip from "./ui/PatternChip";
 import Typo from "./ui/Typo";
 
@@ -23,8 +23,8 @@ const StockCard = ({ stock }: TStockCard) => {
     >
       <View>
         <View style={styles.header}>
-          <Typo styles={styles.symbol}>{stock.symbol}</Typo>
-          <Typo styles={styles.price}>₹ {stock.price}</Typo>
+          <Typo style={styles.symbol}>{stock.symbol}</Typo>
+          <Typo style={styles.price}>₹ {stock.price}</Typo>
         </View>
         <View style={styles.header}>
           <PatternChip
@@ -41,7 +41,7 @@ const StockCard = ({ stock }: TStockCard) => {
             }
           />
 
-          <Text
+          <Typo
             style={{
               color:
                 stock.changePercent > 0
@@ -50,15 +50,15 @@ const StockCard = ({ stock }: TStockCard) => {
             }}
           >
             {stock.changePercent}%
-          </Text>
+          </Typo>
         </View>
       </View>
       <View
         style={[styles.priceContainer, { backgroundColor: theme.background }]}
       >
         <View>
-          <Typo styles={styles.setupLabel}>ENTRY</Typo>
-          <Typo styles={styles.setupPrice}>₹{stock.entry}</Typo>
+          <Typo style={styles.setupLabel}>ENTRY</Typo>
+          <Typo style={styles.setupPrice}>₹{stock.entry}</Typo>
         </View>
         <View
           style={[
@@ -67,12 +67,12 @@ const StockCard = ({ stock }: TStockCard) => {
           ]}
         />
         <View>
-          <Text style={[styles.setupLabel, { color: theme.target.color }]}>
+          <Typo style={[styles.setupLabel, { color: theme.target.color }]}>
             TARGET
-          </Text>
-          <Text style={[styles.setupPrice, { color: theme.target.color }]}>
+          </Typo>
+          <Typo style={[styles.setupPrice, { color: theme.target.color }]}>
             ₹{stock.target}
-          </Text>
+          </Typo>
         </View>
         <View
           style={[
@@ -81,18 +81,18 @@ const StockCard = ({ stock }: TStockCard) => {
           ]}
         />
         <View>
-          <Text style={[styles.setupLabel, { color: theme.stopLoss.color }]}>
+          <Typo style={[styles.setupLabel, { color: theme.stopLoss.color }]}>
             STOP LOSS
-          </Text>
-          <Text style={[styles.setupPrice, { color: theme.stopLoss.color }]}>
+          </Typo>
+          <Typo style={[styles.setupPrice, { color: theme.stopLoss.color }]}>
             ₹{stock.stopLoss}
-          </Text>
+          </Typo>
         </View>
       </View>
       <View style={{ flexDirection: "row", gap: 20 }}>
         <View style={{ flexDirection: "row", gap: 5, alignItems: "center" }}>
           <Typo>Potential:</Typo>
-          <Text
+          <Typo
             style={{
               color:
                 stock.direction === Direction.LONG
@@ -101,7 +101,7 @@ const StockCard = ({ stock }: TStockCard) => {
             }}
           >
             {calculatePotential(stock.entry, stock.target)}%
-          </Text>
+          </Typo>
         </View>
         <View
           style={[
@@ -111,12 +111,12 @@ const StockCard = ({ stock }: TStockCard) => {
         />
         <View style={{ flexDirection: "row", gap: 5, alignItems: "center" }}>
           <Typo>R:R:</Typo>
-          <Text style={{ color: theme.rr }}>
+          <Typo style={{ color: theme.rr }}>
             1 : {calculateRR(stock.entry, stock.target, stock.stopLoss)}
-          </Text>
+          </Typo>
         </View>
       </View>
-      <Typo styles={styles.reason}>{stock.reason}</Typo>
+      <Typo style={styles.reason}>{stock.reason}</Typo>
     </View>
   );
 };

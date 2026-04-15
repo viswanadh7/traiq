@@ -73,8 +73,8 @@ const SignUp = () => {
   return (
     <ThemedView>
       <View style={styles.headerContainer}>
-        <Typo styles={styles.header}>Welcome to TraiQ</Typo>
-        <Typo styles={styles.subHeader}>Create an account to continue</Typo>
+        <Typo style={styles.header}>Welcome to TraiQ</Typo>
+        <Typo style={styles.subHeader}>Create an account to continue</Typo>
       </View>
       <KeyboardAvoidingView>
         <Controller
@@ -131,9 +131,9 @@ const SignUp = () => {
         />
         <SubmitButton name="Sign Up" onPress={handleSubmit(handleSignUp)} />
         <View style={styles.redirectContainer}>
-          <Typo styles={styles.redirectText}>Already have an account?</Typo>
+          <Typo style={styles.redirectText}>Already have an account?</Typo>
           <TouchableOpacity onPress={() => router.replace("/signin")}>
-            <Typo styles={styles.redirectLink}>Sign In</Typo>
+            <Typo style={styles.redirectLink}>Sign In</Typo>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>

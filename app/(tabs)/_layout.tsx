@@ -1,8 +1,8 @@
+import Typo from "@/components/ui/Typo";
 import { useGlobalState } from "@/hooks/use-global-state";
 import { Tabs } from "expo-router";
 import { InfoIcon, ListHeartIcon, RssSimpleIcon } from "phosphor-react-native";
 import React from "react";
-import { Text } from "react-native";
 
 const TabLayout = () => {
   const { theme } = useGlobalState();
@@ -21,14 +21,14 @@ const TabLayout = () => {
         name="feed"
         options={{
           tabBarLabel: ({ focused }) => (
-            <Text
+            <Typo
               style={{
                 color: focused ? theme.text : theme.tabIconDefault,
                 fontSize: 12,
               }}
             >
               Feed
-            </Text>
+            </Typo>
           ),
           title: "Feed",
           headerShown: false,
@@ -45,14 +45,14 @@ const TabLayout = () => {
         name="index"
         options={{
           tabBarLabel: ({ focused }) => (
-            <Text
+            <Typo
               style={{
                 color: focused ? theme.text : theme.tabIconDefault,
                 fontSize: 12,
               }}
             >
               WatchList
-            </Text>
+            </Typo>
           ),
           title: "WatchList",
           headerShown: false,
@@ -69,14 +69,14 @@ const TabLayout = () => {
         name="info"
         options={{
           tabBarLabel: ({ focused }) => (
-            <Text
+            <Typo
               style={{
                 color: focused ? theme.text : theme.tabIconDefault,
                 fontSize: 12,
               }}
             >
               Info
-            </Text>
+            </Typo>
           ),
           title: "Info",
           headerShown: false,
