@@ -7,7 +7,7 @@ type WatchListHeaderProps = {
 };
 const WatchListHeader = ({ date }: WatchListHeaderProps) => {
   return (
-    <Typo styles={styles.listHeader}>
+    <Typo style={styles.listHeader}>
       Watchlist updated on{" "}
       {new Date(date).toLocaleDateString("en-US", {
         year: "numeric",

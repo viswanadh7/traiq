@@ -7,7 +7,7 @@ const NoNetwork = () => {
   return (
     <ThemedView>
       <View style={styles.view}>
-        <Typo styles={styles.text}>No Network!</Typo>
+        <Typo style={styles.text}>No Network!</Typo>
         <Typo>Please check your internet connection.</Typo>
       </View>
     </ThemedView>

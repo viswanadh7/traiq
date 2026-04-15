@@ -65,8 +65,8 @@ const SignIn = () => {
   return (
     <ThemedView>
       <View style={styles.headerContainer}>
-        <Typo styles={styles.header}>Good to see you again</Typo>
-        <Typo styles={styles.subHeader}>Sign in to continue to TraiQ</Typo>
+        <Typo style={styles.header}>Good to see you again</Typo>
+        <Typo style={styles.subHeader}>Sign in to continue to TraiQ</Typo>
       </View>
       <KeyboardAvoidingView>
         <Controller
@@ -106,9 +106,9 @@ const SignIn = () => {
         />
         <SubmitButton name="Sign In" onPress={handleSubmit(handleSignIn)} />
         <View style={styles.redirectContainer}>
-          <Typo styles={styles.redirectText}>Don&#39;t have an account?</Typo>
+          <Typo style={styles.redirectText}>Don&#39;t have an account?</Typo>
           <TouchableOpacity onPress={() => router.replace("/signup")}>
-            <Typo styles={styles.redirectLink}>Sign Up</Typo>
+            <Typo style={styles.redirectLink}>Sign Up</Typo>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>

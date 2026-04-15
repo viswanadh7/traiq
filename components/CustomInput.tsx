@@ -1,12 +1,7 @@
 import { useGlobalState } from "@/hooks/use-global-state";
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TextInputProps,
-  View,
-} from "react-native";
+import { StyleSheet, TextInput, TextInputProps, View } from "react-native";
+import Typo from "./ui/Typo";
 
 type CustomInputProps = {
   label: string;
@@ -25,7 +20,7 @@ const CustomInput = ({ label, error, icon, ...rest }: CustomInputProps) => {
           placeholderTextColor={theme.icon}
         />
       </View>
-      {error && <Text style={styles.error}>{error}</Text>}
+      {error && <Typo style={styles.error}>{error}</Typo>}
     </View>
   );
 };

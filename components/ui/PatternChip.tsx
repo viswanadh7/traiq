@@ -1,4 +1,4 @@
-import { Text } from "react-native";
+import Typo from "./Typo";
 
 type PatternChipProps = {
   text: string;
@@ -8,7 +8,7 @@ type PatternChipProps = {
 
 const PatternChip = ({ text, color, backgroundColor }: PatternChipProps) => {
   return (
-    <Text
+    <Typo
       style={{
         backgroundColor: backgroundColor,
         color: color,
@@ -19,7 +19,7 @@ const PatternChip = ({ text, color, backgroundColor }: PatternChipProps) => {
       }}
     >
       {text}
-    </Text>
+    </Typo>
   );
 };
 

@@ -40,9 +40,9 @@ const NewsCard = memo(({ news, theme }: TNewsCard) => {
         <View style={[styles.cardBody, { backgroundColor: theme.card }]}>
           <View style={styles.dateView}>
             <CalendarDotsIcon size={15} color={theme.text} />
-            <Typo styles={styles.date}>{formattedDate}</Typo>
+            <Typo style={styles.date}>{formattedDate}</Typo>
           </View>
-          <Typo styles={styles.title}>{news.title}</Typo>
+          <Typo style={styles.title}>{news.title}</Typo>
           <Typo numberOfLines={4}>{news.description}</Typo>
         </View>
       </View>

@@ -14,7 +14,7 @@ const SubmitButton = ({ onPress, name }: SubmitButtonProps) => {
       onPress={onPress}
       style={[styles.button, { backgroundColor: theme.submit }]}
     >
-      <Typo styles={styles.buttonText}>{name}</Typo>
+      <Typo style={styles.buttonText}>{name}</Typo>
     </TouchableOpacity>
   );
 };

@@ -14,8 +14,8 @@ const Info = () => {
   return (
     <ThemedView>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Typo styles={styles.title}>TRAIQ</Typo>
-        <Typo styles={styles.description}>
+        <Typo style={styles.title}>TRAIQ</Typo>
+        <Typo style={styles.description}>
           TraiQ is a read-only market watchlist app that displays a curated list
           of stocks which may show notable price movement over the next 1 to 10
           trading days.
@@ -23,54 +23,54 @@ const Info = () => {
 
         <Divider />
 
-        <Typo styles={styles.heading}>What TraiQ Shows</Typo>
-        <Typo styles={styles.text}>TraiQ displays:</Typo>
-        <Typo styles={styles.bullet}>
+        <Typo style={styles.heading}>What TraiQ Shows</Typo>
+        <Typo style={styles.text}>TraiQ displays:</Typo>
+        <Typo style={styles.bullet}>
           • A system-generated watchlist of stocks
         </Typo>
-        <Typo styles={styles.bullet}>
+        <Typo style={styles.bullet}>
           • Expected movement window ranging from 1 to 10 days
         </Typo>
-        <Typo styles={styles.bullet}>
+        <Typo style={styles.bullet}>
           • Directional bias such as bullish or momentum-based setups
         </Typo>
-        <Typo styles={styles.bullet}>
+        <Typo style={styles.bullet}>
           • Supporting context presented in a simple and readable format
         </Typo>
-        <Typo styles={styles.bullet}>
+        <Typo style={styles.bullet}>
           • Market-related news in the Feed tab for general awareness
         </Typo>
-        <Typo styles={styles.text}>
+        <Typo style={styles.text}>
           All data shown in the app is read-only.
         </Typo>
 
         <Divider />
 
-        <Typo styles={styles.heading}>What TraiQ Does Not Do</Typo>
-        <Typo styles={styles.bullet}>
+        <Typo style={styles.heading}>What TraiQ Does Not Do</Typo>
+        <Typo style={styles.bullet}>
           • Does not provide buy or sell instructions
         </Typo>
-        <Typo styles={styles.bullet}>
+        <Typo style={styles.bullet}>
           • Does not execute trades or connect to brokers
         </Typo>
-        <Typo styles={styles.bullet}>
+        <Typo style={styles.bullet}>
           • Does not guarantee accuracy or profits
         </Typo>
-        <Typo styles={styles.bullet}>
+        <Typo style={styles.bullet}>
           • Does not offer personalized financial advice
         </Typo>
-        <Typo styles={styles.bullet}>
+        <Typo style={styles.bullet}>
           • Does not allow users to modify or manage the watchlist
         </Typo>
 
         <Divider />
 
-        <Typo styles={styles.heading}>How to Read the Watchlist</Typo>
-        <Typo styles={styles.text}>
+        <Typo style={styles.heading}>How to Read the Watchlist</Typo>
+        <Typo style={styles.text}>
           Each stock shown represents a potential market opportunity, not a
           recommendation.
         </Typo>
-        <Typo styles={styles.text}>
+        <Typo style={styles.text}>
           Directional labels reflect market bias only and do not imply
           certainty. Users are encouraged to perform their own analysis before
           making any financial decisions.
@@ -78,29 +78,29 @@ const Info = () => {
 
         <Divider />
 
-        <Typo styles={styles.heading}>Data and Updates</Typo>
-        <Typo styles={styles.bullet}>
+        <Typo style={styles.heading}>Data and Updates</Typo>
+        <Typo style={styles.bullet}>
           • Watchlist data is refreshed periodically
         </Typo>
-        <Typo styles={styles.bullet}>
+        <Typo style={styles.bullet}>
           • Market news is sourced from third-party public APIs
         </Typo>
-        <Typo styles={styles.bullet}>
+        <Typo style={styles.bullet}>
           • Data may be delayed, incomplete, or subject to change
         </Typo>
 
         <Divider />
 
-        <Typo styles={styles.heading}>Disclaimer</Typo>
-        <Typo styles={styles.text}>
+        <Typo style={styles.heading}>Disclaimer</Typo>
+        <Typo style={styles.text}>
           TraiQ is not a registered investment advisor.
         </Typo>
-        <Typo styles={styles.text}>
+        <Typo style={styles.text}>
           All information provided by TraiQ is for educational and informational
           purposes only and should not be considered financial, investment, or
           trading advice.
         </Typo>
-        <Typo styles={styles.text}>
+        <Typo style={styles.text}>
           Stock market investments are subject to risk. Past performance does
           not guarantee future results. Users assume full responsibility for any
           decisions made based on the information shown in this app.
@@ -108,8 +108,8 @@ const Info = () => {
 
         <Divider />
 
-        <Typo styles={styles.heading}>Open Source</Typo>
-        <Typo styles={styles.text}>
+        <Typo style={styles.heading}>Open Source</Typo>
+        <Typo style={styles.text}>
           TraiQ is an open-source project created for learning, transparency,
           and experimentation. The source code is available on GitHub.
         </Typo>
@@ -122,12 +122,12 @@ const Info = () => {
           ]}
         >
           <GithubLogoIcon size={20} color={theme.icon} />
-          <Typo styles={styles.githubText}>View on GitHub</Typo>
+          <Typo style={styles.githubText}>View on GitHub</Typo>
         </Pressable>
 
         <Divider />
 
-        <Typo styles={styles.version}>Version {appVersion}</Typo>
+        <Typo style={styles.version}>Version {appVersion}</Typo>
       </ScrollView>
     </ThemedView>
   );
