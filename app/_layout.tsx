@@ -2,7 +2,8 @@ import CustomSplashScreen from "@/components/ui/CustomSplashScreen";
 import Provider from "@/context";
 import { useGlobalState } from "@/hooks/use-global-state";
 import { Stack } from "expo-router";
-import { StatusBar } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { useColorScheme } from "react-native";
 import Toast from "react-native-toast-message";
 
 function StackLayout() {
@@ -25,9 +26,10 @@ function StackLayout() {
 }
 
 export default function RootLayout() {
-  StatusBar.setBarStyle("default");
+  const theme = useColorScheme();
   return (
     <Provider>
+      <StatusBar style={theme === "dark" ? "light" : "dark"} />
       <StackLayout />
       <Toast />
     </Provider>
