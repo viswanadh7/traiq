@@ -19,7 +19,7 @@ const ThemedView = ({ children, paddingHorizontal }: ThemedViewProps) => {
         paddingHorizontal: paddingHorizontal ?? 20,
       }}
     >
-      <View>{children}</View>
+      <View style={{ flex: 1 }}>{children}</View>
     </SafeAreaView>
   );
 };
