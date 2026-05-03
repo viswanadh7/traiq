@@ -1,53 +1,51 @@
-import StockCard from "@/components/StockCard";
-import EmptyWatchList from "@/components/ui/EmptyWatchList";
-import NoNetwork from "@/components/ui/NoNetwork";
-import ThemedView from "@/components/ui/ThemedView";
-import WatchListHeader from "@/components/ui/WatchListHeader";
-import WatchListLoading from "@/components/WatchListLoading";
+import Intraday from "@/screens/Intraday";
+import WatchList from "@/screens/Watchlist";
+import * as React from "react";
+import { useWindowDimensions } from "react-native";
+import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import { useGlobalState } from "@/hooks/use-global-state";
-import supabase from "@/supabase";
-import { TStock } from "@/types/stock.type";
-import React, { useEffect, useState } from "react";
-import { FlatList } from "react-native";
+import ThemedView from "@/components/ui/ThemedView";
 
-const WatchList = () => {
-  const { isConnected } = useGlobalState();
-  const [stocks, setStocks] = useState<TStock[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+const renderScene = SceneMap({
+  watchlist: WatchList,
+  intraday: Intraday,
+});
 
-  useEffect(() => {
-    getStocks();
-  }, []);
+const routes = [
+  { key: "intraday", title: "Intraday" },
+  { key: "watchlist", title: "Watchlist" },
+];
 
-  const getStocks = async () => {
-    const { data, error } = await supabase.from("stocks").select("*");
-    if (error) {
-      console.log(error);
-    }
-    setStocks(data as TStock[]);
-    setLoading(false);
-  };
-
-  if (!isConnected) return <NoNetwork />;
-  if (loading) return <WatchListLoading />;
+export default function App() {
+  const layout = useWindowDimensions();
+  const { theme } = useGlobalState();
+  const [index, setIndex] = React.useState(0);
 
   return (
     <ThemedView paddingHorizontal={0}>
-      <FlatList
-        style={{ paddingHorizontal: 20 }}
-        data={stocks}
-        renderItem={({ item }) => <StockCard stock={item} />}
-        keyExtractor={(item) => String(item.id)}
-        showsVerticalScrollIndicator={false}
-        ListEmptyComponent={<EmptyWatchList />}
-        ListHeaderComponent={
-          stocks.length ? (
-            <WatchListHeader date={stocks?.[0].created_at} />
-          ) : null
-        }
+      <TabView
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        initialLayout={{ width: layout.width }}
+        renderTabBar={(props) => (
+          <TabBar
+            {...props}
+            style={{
+              backgroundColor: theme.background,
+              elevation: 0,
+              shadowOpacity: 0,
+            }}
+            indicatorStyle={{
+              backgroundColor: theme.text,
+              height: 2,
+              borderRadius: 2,
+            }}
+            activeColor={theme.text}
+            inactiveColor={theme.icon}
+          />
+        )}
       />
     </ThemedView>
   );
-};
-
-export default WatchList;
+}
